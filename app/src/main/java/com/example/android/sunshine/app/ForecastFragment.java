@@ -89,6 +89,9 @@ public class ForecastFragment extends Fragment {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
+            FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+            fetchWeatherTask.execute();
+
             return true;
         }
 
@@ -138,6 +141,8 @@ public class ForecastFragment extends Fragment {
                 }
 
                 forecastJsonStr = stringBuffer.toString();
+
+                Log.v("PlaceHolderFragment", forecastJsonStr);
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
