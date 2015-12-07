@@ -99,8 +99,8 @@ public class ForecastFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
 
-           FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
-            fetchWeatherTask.execute("94043");
+            FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+            fetchWeatherTask.execute("30009");
 
             return true;
         }
@@ -207,9 +207,10 @@ public class ForecastFragment extends Fragment {
                 resultStrs[i] = day + " - " + description + " - " + highAndLow;
             }
 
-            for (String s : resultStrs) {
-                Log.v(LOG_TAG, "Forecast entry: " + s);
-            }
+            //For debugging purposes only
+//            for (String s : resultStrs) {
+//                Log.v(LOG_TAG, "Forecast entry: " + s);
+//            }
             return resultStrs;
 
         }
@@ -243,7 +244,8 @@ public class ForecastFragment extends Fragment {
                         .appendQueryParameter(APPID_PARAM, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
                         .build();
 
-                Log.v(LOG_TAG, "The built url is: " + uri.toString());
+                // For debugging purposes only
+                //Log.v(LOG_TAG, "The built url is: " + uri.toString());
 
                 URL url = new URL(uri.toString());
 
@@ -274,7 +276,8 @@ public class ForecastFragment extends Fragment {
 
                 forecastJsonStr = stringBuffer.toString();
 
-                Log.v(LOG_TAG, forecastJsonStr);
+                // For debugging purposes only.
+                //Log.v(LOG_TAG, forecastJsonStr);
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);
@@ -301,6 +304,15 @@ public class ForecastFragment extends Fragment {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result) {
+
+            if(result != null) {
+                mForecastAdapter.clear();
+                mForecastAdapter.addAll(result);
+            }
         }
     }
 }
