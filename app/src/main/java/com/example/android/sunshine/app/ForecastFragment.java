@@ -1,6 +1,7 @@
 package com.example.android.sunshine.app;
 
 import android.graphics.Region;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,6 +91,7 @@ public class ForecastFragment extends Fragment {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
+            String postalCode = "30009";
             FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
             fetchWeatherTask.execute();
 
@@ -98,9 +101,11 @@ public class ForecastFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
+    public class FetchWeatherTask extends AsyncTask<URI, Void, Void> {
 
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+
+        String postalCode;
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -108,17 +113,36 @@ public class ForecastFragment extends Fragment {
         String forecastJsonStr = null;
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(URI... uris) {
 
             try {
+
+                Uri.Builder uriBuilder = new Uri.Builder();
+                String baseUrl = "http://api.openweathermap.org/data/2.5/";
+                //String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
+
+                // Set Base URL first.
+                uriBuilder.appendPath(baseUrl);
+
+                // Loop through parameters.
+                int count = uris.length;
+                for(int i = 0; i<count; ++i) {
+                    uriBuilder.appendPath(uris[i].);
+                }
+
+                // Lastly, append our app id.
+                uriBuilder.appendPath("&APPID=" + BuildConfig.OPEN_WEATHER_MAP_API_KEY);
+
                 String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
                 String apiKey = "&APPID=" + BuildConfig.OPEN_WEATHER_MAP_API_KEY;
 
                 URL url = new URL(baseUrl.concat(apiKey));
 
+                //urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
+
 
                 InputStream inputStream = urlConnection.getInputStream();
                 StringBuffer stringBuffer = new StringBuffer();
