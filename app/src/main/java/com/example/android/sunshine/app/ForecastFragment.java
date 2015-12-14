@@ -1,6 +1,6 @@
 package com.example.android.sunshine.app;
 
-import android.graphics.Region;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +89,13 @@ public class ForecastFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), mForecastAdapter.getItem(i), Toast.LENGTH_SHORT).show();
+                //TODO: Remove this comment
+                //Toast.makeText(getActivity(), mForecastAdapter.getItem(i), Toast.LENGTH_SHORT).show();
+
+                Intent showDetailActivityIntent = new Intent(getActivity(), DetailActivity.class)
+                                                        .putExtra(Intent.EXTRA_TEXT, mForecastAdapter.getItem(i));
+                startActivity(showDetailActivityIntent);
+
             }
         });
 
