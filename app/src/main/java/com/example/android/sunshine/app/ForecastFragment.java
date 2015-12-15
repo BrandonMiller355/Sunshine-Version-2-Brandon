@@ -81,6 +81,8 @@ public class ForecastFragment extends Fragment {
         FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
         fetchWeatherTask.execute("30009");
 
+
+
         final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.

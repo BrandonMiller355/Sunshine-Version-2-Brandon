@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
 
@@ -80,8 +81,8 @@ public class DetailActivity extends ActionBarActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
-//            TextView textView = (TextView) rootView.findViewById(R.id.textView);
-//            textView.setText(getIntent().getExtras().getString("someText"));
+            TextView textView = (TextView) rootView.findViewById(R.id.textView);
+            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
 
 
 
