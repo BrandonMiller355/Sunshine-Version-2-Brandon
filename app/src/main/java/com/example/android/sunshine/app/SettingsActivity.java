@@ -32,6 +32,8 @@ import android.preference.PreferenceManager;
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
 
+    public static final String KEY_PREF_LOCATION_KEY = "pref_location_key";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
