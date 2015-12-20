@@ -31,8 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by brandon.miller on 12/2/2015.
@@ -77,9 +75,6 @@ public class ForecastFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: Remove this comment
-                //Toast.makeText(getActivity(), mForecastAdapter.getItem(i), Toast.LENGTH_SHORT).show();
-
                 Intent showDetailActivityIntent = new Intent(getActivity(), DetailActivity.class)
                         .putExtra(Intent.EXTRA_TEXT, mForecastAdapter.getItem(i));
                 startActivity(showDetailActivityIntent);
@@ -138,12 +133,21 @@ public class ForecastFragment extends Fragment {
         /**
          * Prepare the weather high/lows for presentation.
          */
-        private String formatHighLows(double high, double low) {
+        private String formatHighLowsAndConvert(double high, double low) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String units = sharedPreferences.getString(getString(R.string.pref_units_key),
+                    getString(R.string.pref_units_default));
+
+            if(units.compareTo("F") == 0) {
+                high = 1.8*high + 32;
+                low = 1.8*low + 32;
+            }
+
             // For presentation, assume the user doesn't care about tenths of a degree.
             long roundedHigh = Math.round(high);
             long roundedLow = Math.round(low);
 
-            String highLowStr = roundedHigh + "/" + roundedLow;
+            String highLowStr = "High: " + roundedHigh + " / Low: " + roundedLow;
             return highLowStr;
         }
 
@@ -213,7 +217,7 @@ public class ForecastFragment extends Fragment {
                 double high = temperatureObject.getDouble(OWM_MAX);
                 double low = temperatureObject.getDouble(OWM_MIN);
 
-                highAndLow = formatHighLows(high, low);
+                highAndLow = formatHighLowsAndConvert(high, low);
                 resultStrs[i] = day + " - " + description + " - " + highAndLow;
             }
 

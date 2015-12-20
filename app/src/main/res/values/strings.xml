@@ -17,4 +17,14 @@
         <!-- Default postal code for location preference [CHAR LIMIT=NONE] -->
         <string name="pref_location_default" translatable="false">30009</string>
 
+        <!-- Label for the units preference [CHAR LIMIT=30] -->
+        <string name="pref_units_label">Temperature Units</string>
+    
+        <!-- Key name for storing units in SharedPreferences [CHAR LIMIT=NONE] -->
+        <string name="pref_units_key" translatable="false">units</string>
+    
+        <!-- Default postal code for units preference [CHAR LIMIT=NONE] -->
+        <string name="pref_units_default" translatable="false">C</string>
+    
+
 </resources>
