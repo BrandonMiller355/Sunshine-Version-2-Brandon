@@ -100,6 +100,11 @@ public class ForecastFragment extends Fragment {
             return true;
         }
 
+        if (id == R.id.action_view_location) {
+            ViewLocation();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -111,6 +116,20 @@ public class ForecastFragment extends Fragment {
 
         FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
         fetchWeatherTask.execute(location);
+    }
+
+    public void ViewLocation() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = sharedPreferences.getString(getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default));
+
+        Uri uriViewLocation = Uri.parse("geo:0,0?q=" + location);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uriViewLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {

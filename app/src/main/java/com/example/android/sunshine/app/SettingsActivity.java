@@ -42,28 +42,6 @@ public class SettingsActivity extends PreferenceActivity
         // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
 
-        //TODO: Clean this up
-//        String[] tempUnitsEntries = {
-//                "Celsius",
-//                "Fahrenheit"
-//        };
-//        CharSequence[] entries = tempUnitsEntries;
-//
-//
-//        String[] tempUnitsEntryValues = {
-//                "C",
-//                "F"
-//        };
-//        CharSequence[] entryValues = tempUnitsEntryValues;
-        //List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
-
-//        ListPreference listPreference = new ListPreference(this);
-//
-//        //listPreference = findPreference(getString(R.string.pref_units_key));
-//
-//        listPreference.setEntries(R.array.unitEntries);
-//        listPreference.setEntryValues(R.array.unitEntryValues);
-
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));

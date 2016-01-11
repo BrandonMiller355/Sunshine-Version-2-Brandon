@@ -5,4 +5,8 @@
           android:title="@string/action_refresh"
           android:orderInCategory="1"
           app:showAsAction="never" />
+    <item android:id="@+id/action_view_location"
+          android:title="@string/action_view_location"
+          android:orderInCategory="2"
+          app:showAsAction="never" />
 </menu>
