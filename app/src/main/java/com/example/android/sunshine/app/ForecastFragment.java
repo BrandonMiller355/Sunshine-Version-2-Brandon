@@ -37,6 +37,8 @@ import java.util.ArrayList;
  */
 public class ForecastFragment extends Fragment {
 
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
+
     private ArrayAdapter<String> mForecastAdapter;
 
     public ForecastFragment() {
@@ -118,7 +120,7 @@ public class ForecastFragment extends Fragment {
         fetchWeatherTask.execute(location);
     }
 
-    public void ViewLocation() {
+    private void ViewLocation() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String location = sharedPreferences.getString(getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default));
@@ -127,8 +129,10 @@ public class ForecastFragment extends Fragment {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(uriViewLocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
+        } else {
+            Log.d(LOG_TAG, "Couldn't call " + location + ", no receiving apps installed!");
         }
     }
 
