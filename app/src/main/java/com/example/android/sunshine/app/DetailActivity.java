@@ -73,6 +73,8 @@ public class DetailActivity extends ActionBarActivity {
      */
     public static class DetailFragment extends Fragment {
 
+        private static final String LOG_TAG = DetailActivity.class.getSimpleName();
+
         public DetailFragment() {
         }
 
@@ -89,5 +91,21 @@ public class DetailActivity extends ActionBarActivity {
 
             return rootView;
         }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu, LayoutInflater inflater) {
+            // Inflate menu resource file.
+            inflater.inflate(R.menu.detailfragment, menu);
+
+            // Locate MenuItem with ShareActionProvider
+            MenuItem item = menu.findItem(R.id.menu_item_share);
+
+            // Fetch and store ShareActionProvider
+            mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+
+            // Return true to display menu
+            return true;
+        }
+
     }
 }
