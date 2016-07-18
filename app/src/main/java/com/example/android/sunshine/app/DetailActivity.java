@@ -77,6 +77,8 @@ public class DetailActivity extends ActionBarActivity {
 
         private static final String LOG_TAG = DetailActivity.class.getSimpleName();
         private ShareActionProvider mShareActionProvider;
+        private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
+        private String mForecastStr;
 
         public DetailFragment() {
             setHasOptionsMenu(true);
@@ -89,7 +91,8 @@ public class DetailActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
             TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
-            textView.setText(getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT));
+			mForecastStr = getActivity().getIntent().getExtras().getString(Intent.EXTRA_TEXT);
+            textView.setText(mForecastStr);
 
             return rootView;
         }
@@ -118,16 +121,16 @@ public class DetailActivity extends ActionBarActivity {
                         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT,
-                                        "test");
+                    mForecastStr + FORECAST_SHARE_HASHTAG);
                         return shareIntent;
         }
 
-        // Call to update the share intent
-        private void setShareIntent(Intent shareIntent) {
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(shareIntent);
-            }
-        }
+//        // Call to update the share intent
+//        private void setShareIntent(Intent shareIntent) {
+//            if (mShareActionProvider != null) {
+//                mShareActionProvider.setShareIntent(shareIntent);
+//            }
+//        }
 
     }
 }
