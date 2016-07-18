@@ -37,7 +37,7 @@ public class DetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-		
+
         Log.d(DetailActivity.class.toString(), "The text that was passed is: " + getIntent().getExtras().getString(Intent.EXTRA_TEXT));
 
         if (savedInstanceState == null) {
@@ -81,7 +81,7 @@ public class DetailActivity extends ActionBarActivity {
         private String mForecastStr;
 
         public DetailFragment() {
-//            setHasOptionsMenu(true);
+            setHasOptionsMenu(true);
         }
 
         @Override
@@ -97,24 +97,24 @@ public class DetailActivity extends ActionBarActivity {
             return rootView;
         }
 
-//        @Override
-//        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//            // Inflate menu resource file.
-//            inflater.inflate(R.menu.detailfragment, menu);
-//
-//            // Locate MenuItem with ShareActionProvider
-//            MenuItem item = menu.findItem(R.id.menu_item_share);
-//
-//            // Fetch and store ShareActionProvider
-//            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-//
-//            // like when the user selects a new piece of data they might like to share.
-//            if (mShareActionProvider != null ) {
-//                mShareActionProvider.setShareIntent(createShareForecastIntent());
-//            } else {
-//                Log.d(LOG_TAG, "Share Action Provider is null?");
-//            }
-//        }
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            // Inflate menu resource file.
+            inflater.inflate(R.menu.detailfragment, menu);
+
+            // Locate MenuItem with ShareActionProvider
+            MenuItem item = menu.findItem(R.id.menu_item_share);
+
+            // Fetch and store ShareActionProvider
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+            // like when the user selects a new piece of data they might like to share.
+            if (mShareActionProvider != null ) {
+                mShareActionProvider.setShareIntent(createShareForecastIntent());
+            } else {
+                Log.d(LOG_TAG, "Share Action Provider is null?");
+            }
+        }
 
         private Intent createShareForecastIntent() {
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
