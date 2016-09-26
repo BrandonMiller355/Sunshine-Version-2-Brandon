@@ -124,13 +124,5 @@ public class DetailActivity extends ActionBarActivity {
                     mForecastStr + FORECAST_SHARE_HASHTAG);
                         return shareIntent;
         }
-
-//        // Call to update the share intent
-//        private void setShareIntent(Intent shareIntent) {
-//            if (mShareActionProvider != null) {
-//                mShareActionProvider.setShareIntent(shareIntent);
-//            }
-//        }
-
     }
 }
